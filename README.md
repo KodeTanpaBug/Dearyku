@@ -1,6 +1,6 @@
-# Jurnal Pribadi Online (Personal Diary App)
+# Deary Pribadi Online (Personal Diary App)
 
-Aplikasi jurnal pribadi online yang memungkinkan pengguna untuk menulis, menyimpan, dan mengelola catatan harian mereka dengan fitur keamanan dan mode gelap.
+Aplikasi Deary pribadi online yang memungkinkan pengguna untuk menulis, menyimpan, dan mengelola catatan harian mereka dengan fitur keamanan dan mode gelap.
 
 ## Fitur Utama
 
