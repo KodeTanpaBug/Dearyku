@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deary Pribadi tempat bercerita</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div id="loginForm" class="auth-form">
+            <div class="form-header">
+                <h2><i class="fas fa-brain"></i> Dearyku</h2>
+                <p>Tempat Saya Bercerita</p>
+            </div>
+            <form id="login">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-input-group">
+                        <input type="password" id="loginPassword" required>
+                        <button type="button" id="toggleLoginPassword" class="btn-icon">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
+                <button type="button" id="debugBtn" class="btn-secondary" style="margin-top:10px; width:100%;">
+                    <i class="fas fa-bug"></i> Debug Info
+                </button>
+            </form>
+            <p class="auth-switch">Belum punya akun? <a href="#" id="showRegister">Daftar</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="auth-form hidden">
+            <div class="form-header">
+                <h2><i class="fas fa-user-plus"></i> Daftar Akun</h2>
+                <p>Buat akun Deary </p>
+            </div>
+            <form id="register">
+                <div class="form-group">
+                    <label for="registerName">Nama Lengkap</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <div class="password-input-group">
+                        <input type="password" id="registerPassword" required>
+                        <button type="button" id="toggleRegisterPassword" class="btn-icon">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Konfirmasi Password</label>
+                    <div class="password-input-group">
+                        <input type="password" id="confirmPassword" required>
+                        <button type="button" id="toggleConfirmPassword" class="btn-icon">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" id="generateRandomBtn" class="btn-secondary" style="margin-bottom:10px;">
+                    <i class="fas fa-random"></i> Generate Random
+                </button>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-user-plus"></i> Daftar
+                </button>
+            </form>
+            <p class="auth-switch">Sudah punya akun? <a href="#" id="showLogin">Masuk</a></p>
+        </div>
+
+        <!-- AI Smart Journal Interface -->
+        <div id="diaryInterface" class="diary-container hidden">
+            <header class="diary-header">
+                <div class="header-left">
+                    <h1><i class="fas fa-brain"></i> Dearyku</h1>
+                    <p id="userInfo">Selamat datang!</p>
+                </div>
+                <div class="header-right">
+                    <button id="aiAssistantBtn" class="btn-icon" title="AI Assistant">
+                        <i class="fas fa-robot"></i>
+                    </button>
+                    <button id="voiceInputBtn" class="btn-icon" title="Voice Input">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="darkModeToggle" class="btn-icon" title="Mode Gelap">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="encryptToggle" class="btn-icon" title="Enkripsi">
+                        <i class="fas fa-lock"></i>
+                    </button>
+                    <button id="logoutBtn" class="btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Keluar
+                    </button>
+                </div>
+            </header>
+
+            <div class="diary-content">
+                <div class="diary-sidebar">
+                    <div class="sidebar-header">
+                        <h3><i class="fas fa-book-open"></i> Catatan Harian</h3>
+                        <button id="newEntryBtn" class="btn-primary">
+                            <i class="fas fa-plus"></i> Catatan Baru
+                        </button>
+                    </div>
+                    
+                    <!-- AI Insights Panel -->
+                    <div class="ai-insights-panel">
+                        <h4><i class="fas fa-chart-line"></i> AI Insights</h4>
+                        <div id="moodTracker" class="mood-tracker">
+                            <span>Mood Hari Ini:</span>
+                            <div class="mood-buttons">
+                                <button class="mood-btn" data-mood="😊">😊</button>
+                                <button class="mood-btn" data-mood="😐">😐</button>
+                                <button class="mood-btn" data-mood="😔">😔</button>
+                                <button class="mood-btn" data-mood="😡">😡</button>
+                                <button class="mood-btn" data-mood="🤔">🤔</button>
+                            </div>
+                        </div>
+                        <div id="aiSuggestions" class="ai-suggestions">
+                            <span>AI Suggestions:</span>
+                            <div id="suggestionsList"></div>
+                        </div>
+                    </div>
+
+                    <div id="entriesList" class="entries-list">
+                        <!-- Entries will be populated here -->
+                    </div>
+                </div>
+
+                <div class="diary-main">
+                    <div id="entryEditor" class="entry-editor">
+                        <div class="editor-header">
+                            <input type="text" id="entryTitle" placeholder="Judul catatan..." class="title-input">
+                            <div class="editor-actions">
+                                <button id="aiEnhanceBtn" class="btn-secondary" title="AI Enhance">
+                                    <i class="fas fa-magic"></i> AI Enhance
+                                </button>
+                                <button id="saveEntryBtn" class="btn-primary">
+                                    <i class="fas fa-save"></i> Simpan
+                                </button>
+                                <button id="deleteEntryBtn" class="btn-danger">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Writing Assistant -->
+                        <div id="aiAssistant" class="ai-assistant hidden">
+                            <div class="ai-header">
+                                <i class="fas fa-robot"></i> AI Writing Assistant
+                                <button id="closeAiAssistant" class="btn-icon">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="ai-content">
+                                <div class="ai-prompt">
+                                    <input type="text" id="aiPromptInput" placeholder="Tanyakan sesuatu pada AI...">
+                                    <button id="askAiBtn" class="btn-primary">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div id="aiResponse" class="ai-response"></div>
+                            </div>
+                        </div>
+
+                        <div class="editor-content">
+                            <textarea id="entryContent" placeholder="Tulis catatan harian Anda di sini... AI akan membantu menganalisis dan memberikan saran..." class="content-textarea"></textarea>
+                        </div>
+                        
+                        <div class="editor-footer">
+                            <div class="footer-left">
+                                <span id="entryDate"></span>
+                                <span id="wordCount">0 kata</span>
+                            </div>
+                            <div class="footer-right">
+                                <span id="aiAnalysis" class="ai-analysis"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Assistant Modal -->
+        <div id="aiModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+                    <button id="closeModal" class="btn-icon">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="ai-features">
+                        <div class="ai-feature">
+                            <i class="fas fa-magic"></i>
+                            <h4>AI Writing Enhancement</h4>
+                            <p>Perbaiki dan tingkatkan tulisan Anda</p>
+                        </div>
+                        <div class="ai-feature">
+                            <i class="fas fa-chart-pie"></i>
+                            <h4>Mood Analysis</h4>
+                            <p>Analisis mood berdasarkan tulisan</p>
+                        </div>
+                        <div class="ai-feature">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Smart Suggestions</h4>
+                            <p>Dapatkan saran menulis yang cerdas</p>
+                        </div>
+                        <div class="ai-feature">
+                            <i class="fas fa-search"></i>
+                            <h4>Smart Search</h4>
+                            <p>Cari berdasarkan konteks dan emosi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
